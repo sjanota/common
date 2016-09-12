@@ -1,5 +1,7 @@
-{ok, List} = file:list_dir("lib"),
 {ok, Cwd} = file:get_cwd(),
+io:format("~p~n", [Cwd]),
+{ok, List} = file:list_dir("lib"),
+io:format("~p~n", [List]),
 [
     {deps, [{list_to_atom(D), {local, Cwd ++ "/lib/" ++ D}} || D <- List, filelib:is_dir("lib/" ++ D)]},
     {plugins, [
