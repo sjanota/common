@@ -1,7 +1,7 @@
-{ok, List} = file:list_dir("apps"),
-Deps = [{list_to_atom(Dep), {local, "apps/" ++ Dep}} || Dep, filelib:is_dir(Dep) <- List}],
+{ok, List} = file:list_dir("lib"),
+{ok, Cwd} = file:get_cwd(),
 [
-    {deps, Deps},
+    {deps, [{list_to_atom(D), {local, Cwd ++ "/lib/" ++ D}} || D <- List, filelib:is_dir("lib/" ++ D)]},
     {plugins, [
         {rebar_subdir_plugin, {git, "https://github.com/sjanota/rebar_subdir_plugin.git", {branch, "master"}}}
     ]}
